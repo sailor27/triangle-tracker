@@ -9,10 +9,16 @@
   "author": "Sailor Winkelman, Holly Wilkalis",
   "license": "ISC",
   "devDependencies": {
+    "browser-sync": "^2.23.2",
     "browserify": "^15.0.0",
-    "gulp-concat": "^2.6.1"
+    "del": "^3.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-uglify": "^3.0.0",
+    "gulp-util": "^3.0.8",
+    "uglify": "^0.1.5"
   },
   "dependencies": {
+    "gulp": "^3.9.1",
     "vinyl-source-stream": "^2.0.0"
   }
 }
