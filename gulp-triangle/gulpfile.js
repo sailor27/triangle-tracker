@@ -20,7 +20,7 @@ var lib = require('bower-files')({
     }
   }
 });
-// var sass = require('gulp-sass');
+var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 
 //linter to run on all npfiles in js folder//
@@ -79,11 +79,11 @@ gulp.task('build', ['clean'], function() {
     //start bower and cssBuild here
   }
   gulp.start('bower');
-  // gulp.start('cssBuild');
+  gulp.start('cssBuild');
 });
 
 //SERVE ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-gulp.task('serve', function() {
+gulp.task('serve', ['build'], function() {
   browserSync.init({
     server: {
       baseDir: "./",
@@ -95,7 +95,7 @@ gulp.task('serve', function() {
   gulp.watch(['js/*.js'], ['jsBuild']);
   gulp.watch(['bower.json'], ['bowerBuild']);
   gulp.watch(['*.html'], ['htmlBuild']);
-  // gulp.watch(["scss/*.scss", "scss/**/*.scss"], ['cssBuild']);
+  gulp.watch(["scss/*.scss", "scss/**/*.scss"], ['cssBuild']);
 });
 
 gulp.task('jsBuild', ['jsBrowserify', 'jshint'], function() {
@@ -111,14 +111,13 @@ gulp.task('htmlBuild', function(){
 });
 
 //map changes to .scss files to .css files
-// gulp.task('cssBuild', function(){
-//   return gulp.src('./scss/*.scss')
-//     .pipe(sourcemaps.init())
-//     .pipe(sass().on('error'), sass.logError)
-//     .pipe(sourcemaps.write())
-//     .pipe(gulp.dest('./build/css'))
-//     .pipe(browserSync.stream());
-// });
+gulp.task('cssBuild', function(){
+  return gulp.src('./scss/*.scss')
+    .pipe(sourcemaps.init())
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest('./build/css'))
+    .pipe(browserSync.stream());
+});
 
 
 //TEST ~~~~~~~~~~~~~~~~~~~~~~~~
